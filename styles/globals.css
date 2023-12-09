@@ -313,15 +313,22 @@ input:focus:in-range {
   padding: 10px;
   border-bottom: 1px solid lightgray;
   font-size:  14px;
+  cursor: pointer;
 }
 
 .list-group-item:last-child {
   border-bottom: none;
 }
 
+.p-0 {
+  padding: 0;
+}
+.p-1 {
+  padding: 5px;
+}
 .front-filtering-client {
   display: grid;
-  grid-template-columns: repeat(5,1fr);
+  grid-template-columns: repeat(6,1fr);
   grid-gap: 10px;
 }
 
@@ -340,7 +347,25 @@ input:focus:in-range {
     transform: rotate(360deg);
   }
 }
+.m-1 {
+  margin: 1rem;
+}
 
+.m-2 {
+  margin: 2rem;
+}
+
+.m-3 {
+  margin: 3rem;
+}
+
+.m-4 {
+  margin: 4rem;
+}
+
+.m-5 {
+  margin: 5rem;
+}
 
 /* small screens */
 @media only screen and (max-width: 600px) {
