@@ -41,6 +41,7 @@
   --page-background-start: hsl(var(--background-start-rgb));
   --font-family-sans-serif: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
   --font-family-monospace: SFMono-Regular,Menlo,Monaco,Consolas,"Liberation";
+  --custom-family: walsheim, Helvetica, Arial, Lucida Grande, sans-serif;
   --page-background-end: hsl(var(--background-end-rgb));
 }
 
@@ -52,7 +53,7 @@ body {
     var(--page-background-end)
   );
   color: hsl(var(--foreground-rgb));
-  font-family: var(--font-family-sans-serif);
+  font-family: var(--custom-family);
   font-size: 16px;
   line-height: 1.5;
   margin: 0;
@@ -64,6 +65,9 @@ li {
   text-decoration: none;
 }
 
+.bg-white {
+  background-color: white;
+}
 ul {
   margin: 0;
   padding: 0;
@@ -243,18 +247,70 @@ button {
   grid-gap: 10px;
 }
 
+.grid-20-80 {
+  grid-template-columns: 20% auto;
+  margin: 0;
+  padding: 0;
+}
 
+.border-right {
+  border-right: 1px solid lightgray;
+}
 .btn-orange {
   background-color: var(--prime-attention);
   color: white;
 }
 
+.text-orange {
+  color: var(--prime-attention);
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.text-success {
+  color: var(--prime-primary);
+}
+
+.text-danger {
+  color: var(--prime-negative);
+}
+
+
+.page-viewer {
+  position: relative;
+  min-height: 100vh !important;
+}
 
 .btn-success {
   background-color: var(--prime-secondary);
   color: white;
 }
 
+.test-single-view:is(:hover, :focus, :active) {
+  filter: brightness(0.9);
+  background-color: whitesmoke;
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 20px;
+}
+
+.btn-danger {
+  background-color: var(--prime-negative-hover);
+  color: white;
+}
+
+.btn-info {
+  background-color: var(--color-focus-indicator);
+  color: white;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+}
 .btn-success:hover {
   background-color: var(--prime-secondary-hover);
 }
@@ -332,6 +388,31 @@ input:focus:in-range {
   grid-gap: 10px;
 }
 
+.grid-5 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: auto;
+}
+
+.w-full {
+  width: 100% !important;
+}
+
+.fw-bold {
+  font-weight: 600;
+}
+
+.p-5 {
+  padding: 25px;
+}
+
+.p-4 {
+  padding: 20px;
+}
+
+.p-3 {
+  padding: 15px;
+}
 .front-filtering-client:nth-of-type(odd) {
   background-color: whitesmoke;
 }
@@ -367,6 +448,46 @@ input:focus:in-range {
   margin: 5rem;
 }
 
+.card {
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  background-color: white;
+  min-height: fit-content;
+  max-height: max-content;
+}
+
+.card>.card-header {
+  background-color: lightgary;
+  border-bottom: 1px solid lightgray;
+  margin: 0;
+  padding: 0;
+}
+
+.card>.card-body {
+  padding: 0px;
+  margin: 0;
+}
+
+.border-bottom {
+  border-bottom: 1px solid lightgray;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.card>.card-header>.card-title {
+  font-size: 16px;
+  text-transform: capitalize;
+  font-weight: 400;
+  padding: 20px;
+  margin-left: 20px;
+  margin: 0;
+  width: inherit;
+  display: flex !important;
+  justify-content: space-between;
+  flex-direction: row;
+}
 /* small screens */
 @media only screen and (max-width: 600px) {
   .grid-two {

@@ -1,11 +1,9 @@
 import Divider from "@/components/Divider";
-import RequestForm from "@/components/request/form";
 
-
-export default function Home() {
+export default function Homepage() {
   return (
     <Divider>
-      {/* <RequestForm/> */}
+      
     </Divider>
   )
 }
