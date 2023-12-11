@@ -25,13 +25,18 @@ export default function ViewReportSummary() {
 
 
   const handleEmbedLink = async (item) => {
-    setpdfloading(true);
-    setshow(true);
-    const { testid, name, billingid } = item;
-    const structuredName = name.trim().replace(" ", "_");
-    const link = `http://localhost:5000/billing/result/pdf?billingid=${billingid}&&testid=${testid}&&testname=${structuredName}`;
-    setembedLink(link);
-    setpdfloading(false);
+    const { testid, name, billingid, approval } = item;
+    if (approval == 1) {
+      setpdfloading(true);
+      setshow(true);
+      const structuredName = name.trim().replace(" ", "_");
+      const link = `http://localhost:5000/billing/result/pdf?billingid=${billingid}&&testid=${testid}&&testname=${structuredName}`;
+      setembedLink(link);
+      setTimeout(() => {
+        setpdfloading(false);
+      }, 500);
+    }
+    return;
   }
 
   const determineStage = function (item) {
@@ -76,17 +81,17 @@ export default function ViewReportSummary() {
                     {results.map((item, index) => {
                       const stage = determineStage(item);
                       return (
-                        <li className={`border-bottom p-4 test-single-view text-capitalize ${!showpdf ?  "grid grid-3" : "grid"}`} key={index}>
+                        <li onClick={(ev) => handleEmbedLink(item)} className={`border-bottom p-4 test-single-view text-capitalize ${!showpdf ? "grid grid-3" : "grid"}`} key={index}>
                           <span>{item?.name}</span>
                           {showpdf && (<br />)}
                           <span
                             className={stage == 'approved' ? 'text-success' :
                               'ready' ? 'text-orange' : 'processing' ? 'text-info' : 'text-danger'}
                           >
-                           {stage}
+                            {stage}
                           </span>
                           <span>
-                            {(stage == 'approved' && !showpdf )&& <button className="btn-primary" onClick={() => {handleEmbedLink(item)}}>View Report</button>}
+                            {(stage == 'approved' && !showpdf) && <button className="btn-primary" onClick={() => { handleEmbedLink(item) }}>View Report</button>}
                           </span>
                         </li>
                       )
@@ -99,7 +104,7 @@ export default function ViewReportSummary() {
                       pdfloading ?
                         <div className="loader"></div> :
                         <embed src={embedLink} width="100%" height="100%" />
-                     }
+                    }
                   </div>
                 )}
               </>
