@@ -21,7 +21,6 @@ export default function OrdersPage() {
 
   return (
     <>
-      <h2>Recently Requested Test</h2>
       {loading && <h4 className="loader"></h4>}
       {!loading && data.length > 0 && (
         <div className="list-group">
