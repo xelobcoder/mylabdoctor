@@ -1,7 +1,7 @@
 "use client";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
-import { getReadyResult } from "./util";
+import { getReadyResult } from "../../../lib/requestUtil";
 
 export default function ViewReportSummary() {
   const searchparams = useSearchParams();
