@@ -3,7 +3,7 @@ const Navbar = () => {
   const linksItems = [
     { title: 'request test', link: "/request" },
     { title: "waiting list", link: "/waitinglist" },
-    { title: 'result', link: "/result" },
+    { title: 'orders', link: "/orders" },
     { title: 'sales', link: '/sales' },
     { title: 'dashboard', link: '/dashboard' },
     {title:'report complaint',link: 'complaint'},

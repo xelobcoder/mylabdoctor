@@ -1,12 +1,10 @@
-import Navbar from "./Navbar"
+import ApplicationWrapper from "./ApplicationWrapper.jsx"
+import { AuthenticationContext } from "./AuthenticationContext.js"
 
 export default function Divider({ children }) {
   return (
-    <>
-      <div className="app-divider">
-        <Navbar />
-        <main className="main-wrapper">{children}</main>
-      </div>
-    </>
+    <AuthenticationContext>
+      <ApplicationWrapper>{children}</ApplicationWrapper>
+    </AuthenticationContext>
   )
 }

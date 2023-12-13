@@ -1,12 +1,15 @@
 "use client";
-import Divider from "@/components/Divider";
-import { useCallback, useEffect, useState } from "react";
-import { getTestList } from "./util";
+
+import { useCallback, useContext, useEffect, useState } from "react";
+import { getTestList } from "../../../lib/billingUtil";
 import { ToastContainer, toast } from "react-toastify";
 import { useSearchParams } from "next/navigation";
+import { customPost } from "@/components/request/util";
+import { AuthContext } from "@/components/AuthenticationContext";
 
 
 export default function Billing() {
+  const { auth } = useContext(AuthContext);
   const [data, setData] = useState([]);
   const [store, setStore] = useState([]);
   const [search, setSearch] = useState('');
@@ -15,7 +18,10 @@ export default function Billing() {
   const [viewCart, setViewCart] = useState(false);
   const urlparams = useSearchParams();
   const [hightlighted, setHightlighted] = useState(0);
+  const employeeid = auth?.employeeid;
   const patientid = urlparams.get('patientid');
+
+
 
   const getData = useCallback(async () => {
     await getTestList(setData, setLoading, setStore);
@@ -80,6 +86,19 @@ export default function Billing() {
   }, [])
 
 
+
+  const addtocart = async (item) => {
+    // check if item is already in cart
+    if (cart.length == 0) { setCart([item]); }
+
+    if (cart.length > 0) {
+      const exist = cart.filter((i) => { return i.id == item.id });
+      if (exist.length == 0) { setCart([...cart, item]); toast.success(`${item?.name} added to cart`, { autoClose: 500 }); return; }
+      toast.warning(`${item.name} already in cart`, { autoClose: 500 });
+    }
+  }
+
+
   useEffect(() => {
     const highlightedItem = document.querySelector('.highlighted-item');
     if (highlightedItem) {
@@ -88,12 +107,11 @@ export default function Billing() {
     }
   }, [hightlighted])
 
-  const listClicked = (index, item) => { 
+  const listClicked = (index, item) => {
     setSearch(item.name);
-    setCart([...cart, item]);
-    toast.success(`${item.name} added to cart`,{autoClose: 500});
+    addtocart(item);
     setSearch('');
-   }
+  }
 
 
   const listKeyDown = (e) => {
@@ -106,8 +124,7 @@ export default function Billing() {
     if (e.key === 'Enter') {
       e.preventDefault();
       setSearch(data[hightlighted - 1].name);
-      setCart([...cart, data[hightlighted - 1]]);
-      toast.success(`${data[hightlighted - 1].name} added to cart`,{autoClose: 500});
+      addtocart(data[hightlighted - 1]);
       setSearch('');
     }
   }
@@ -121,8 +138,35 @@ export default function Billing() {
     setViewCart(!viewCart);
   }
 
+
+  const handleCheckout = async function () {
+    // checkout the cart
+    const checkout = cart.map((item) => {
+      return { id: item.id, name: item.name, price: item.price }
+    });
+
+    if (employeeid && checkout.length > 0) {
+      setLoading(true);
+      const pushRequest = await customPost('orders/temporary', { clinicianid: employeeid, data: checkout ,patientid});
+      const { status, statusCode, message } = pushRequest;
+      if (status == 'success' && statusCode == 200) {
+        toast.success(message, { autoClose: 2000 });
+        setCart([]);
+        setViewCart(false);
+        setLoading(false);
+        return;
+      } else {
+        toast.error(message, { autoClose: 2000 });
+        setLoading(false);
+        return;
+      }
+    }
+  }
+
+  console.log(employeeid)
+
   return (
-    <Divider>
+    <>
       <ToastContainer />
       <div className="d-flex justify-content-between ">
         <input id="search-input" autoFocus onKeyDown={(ev) => { handleKeyDown(ev) }} onChange={handleSearch} value={search} tabIndex={0} className="prime-input" type="text" placeholder="Search for tests" />
@@ -162,10 +206,10 @@ export default function Billing() {
                 )
               })}
             </div>
-            <button className="btn-success my-2">Checkout</button>
+            <button onClick={handleCheckout} className="btn-success my-2">Checkout</button>
           </div>}
         </div>
       </div>
-    </Divider>
+    </>
   )
 }

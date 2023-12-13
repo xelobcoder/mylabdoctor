@@ -1,7 +1,6 @@
 "use client";
-import Divider from "@/components/Divider";
 import { useState } from "react";
-import { handleSearch } from "./billing/util";
+import { handleSearch } from "../../lib/billingUtil";
 import { useRouter } from "next/navigation";
 
 export default function RequestTest() {
@@ -10,13 +9,13 @@ export default function RequestTest() {
   const [results, setResults] = useState([]);
   const router = useRouter();
   return (
-    <Divider>
-      <div style={{width:'80%'}}>
+    <>
+      <div style={{ width: '80%' }}>
         <input type="text"
           value={query}
-          onChange={(e) =>  setQuery(e.target.value)}
+          onChange={(e) => setQuery(e.target.value)}
           placeholder="search using patient name or mobile number or email address or your unique id" className="prime-input" />
-        <button onClick={ (ev) =>  {handleSearch(query,setResults,setLoading)}}type="button" className="btn-orange mx-1">
+        <button onClick={(ev) => { handleSearch(query, setResults, setLoading) }} type="button" className="btn-orange mx-1">
           search
         </button>
       </div>
@@ -48,15 +47,15 @@ export default function RequestTest() {
           ) : (
             <div className="list-group mt-1">
               <div className="list-group-item d-flex justify-content-between">
-                  <p className="fw-bold">No Data Available</p>
-                  <button className="btn btn-success p-2" onClick={(ev) => {router.push('/request/new')}}>
-                    register new client
-                  </button>
+                <p className="fw-bold">No Data Available</p>
+                <button className="btn btn-success p-2" onClick={(ev) => { router.push('/request/new') }}>
+                  register new client
+                </button>
               </div>
             </div>
           )}
         </div>
       )}
-   </Divider>
+    </>
   )
 }

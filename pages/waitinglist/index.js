@@ -1,5 +1,4 @@
 "use client";
-import Divider from "@/components/Divider";
 import { customFetch } from "@/components/request/util";
 import { useCallback, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -11,13 +10,19 @@ export default function WaitingList() {
   const navigation = useRouter();
 
   const getData = useCallback(async (clinicianid) => {
-    setLoading(true);
-    const response = await customFetch(`clinician/resultsets?clinicianid=${clinicianid}&&startdate=${query.startdate}&&enddate=${query.enddate}`);
-    const { result, status, statusCode } = response;
-    if (statusCode == 200 && status == 'success' && result.length > 0) {
-      setData(result); setLoading(false);
-    } else {
-      setData([]); setLoading(false);
+    try {
+      setLoading(true);
+      const response = await customFetch(`clinician/resultsets?clinicianid=${clinicianid}&&startdate=${query.startdate}&&enddate=${query.enddate}`);
+      const { result, status, statusCode } = response;
+      if (statusCode == 200 && status == 'success' && result.length > 0) {
+        setData(result); setLoading(false);
+      } else {
+        setData([]); setLoading(false);
+      }
+    } catch (err) {
+      setLoading(false);
+      setData([]);
+      alert('connection to server failed');
     }
   }, [query])
 
@@ -26,14 +31,14 @@ export default function WaitingList() {
   }, []);
 
 
-  const navigateTo = (billingid,fullname) => {
+  const navigateTo = (billingid, fullname) => {
     setLoading(true);
     navigation.push(`/waitinglist/viewreport?billingid=${billingid}&&clientname=${fullname}`);
   }
 
 
   return (
-    <Divider>
+    <>
       <div className="filtering-waitinglist">
         {/* <select className="prime-select" onChange={(ev) => setQuery({ ...query, type: ev.target.value })}>
           <option value="all">All</option>
@@ -59,7 +64,7 @@ export default function WaitingList() {
                     <p>BilledOn: {new Date(item?.billingdate).toLocaleDateString()}</p>
                     <p>status: {item.ready_count}{"/"}{item.totaltest}</p>
                     <p>
-                      <button type="button" onClick={(ev) =>  {navigateTo(item?.billingid,item?.fullname)}} className="btn-orange p-1">view reports</button>
+                      <button type="button" onClick={(ev) => { navigateTo(item?.billingid, item?.fullname) }} className="btn-orange p-1">view reports</button>
                     </p>
                   </div>
                 )
@@ -68,6 +73,6 @@ export default function WaitingList() {
           </>
         )}
       </section>
-    </Divider>
+    </>
   )
 }

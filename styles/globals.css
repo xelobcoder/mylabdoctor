@@ -222,6 +222,32 @@ input:is(:focus, :active), select:is(:focus, :active) {
   transition: 500ms ease-in-out;
 }
 
+.bg-secondary {
+  background-color: var(--prime-neutral-focus);
+  color: white;
+}
+
+.border-bolder{
+  border-left: 5px solid var(--prime-attention);
+}
+
+.processed {
+  background-color: var(--prime-positive);
+  color: white;
+}
+
+.pending {
+  background-color: red;
+  color: white;
+}
+.border-danger {
+  border: 1px solid red;
+}
+
+.border-success {
+  border:  1px solid var(--prime-primary-active);
+}
+
 
 .alert-success {
   background-color: var(--prime-positive);
@@ -601,6 +627,11 @@ max-height: 15vh;
   padding: 10px;
   cursor: pointer;
 }
+
+
+
+
+
 /* small screens */
 @media only screen and (max-width: 600px) {
   .grid-two {
@@ -611,5 +642,6 @@ max-height: 15vh;
     grid-template-columns: 100%;
   }
 }
+
 
 
