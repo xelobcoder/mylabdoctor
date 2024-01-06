@@ -16,29 +16,28 @@ export default function OrdersPage() {
     if (clinicianid) getData(clinicianid, setData, setLoading);
   }, [getData, clinicianid]);
 
-
-  console.log(data);
-
   return (
     <>
       {loading && <h4 className="loader"></h4>}
       {!loading && data.length > 0 && (
-        <div className="list-group">
-          <div className="list-group-item grid grid-5 bg-secondary text-capitalize">
-            <span>patientid</span>
-            <span>fullname</span>
-            <span>order date and time</span>
-            <span>birth date</span>
-            <span>status</span>
+        <>
+          <div className="list-group">
+            <div className="list-group-item grid grid-5 bg-secondary text-capitalize">
+              <span>patientid</span>
+              <span>fullname</span>
+              <span>order date and time</span>
+              <span>birth date</span>
+              <span>status</span>
+            </div>
+            {data.map((item, index) => {
+              return (
+                <>
+                  <ListItemDisplay key={index} item={item} index={index} />
+                </>
+              )
+            })}
           </div>
-          {data.map((item, index) => {
-            return (
-              <>
-                <ListItemDisplay key={index} item={item} index={index} />
-              </>
-            )
-          })}
-        </div>
+        </>
       )}
     </>
   )

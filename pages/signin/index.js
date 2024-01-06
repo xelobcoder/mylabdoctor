@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { customPost } from "@/components/request/util";
 import { useState, useContext } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import { AuthContext } from "@/components/AuthenticationContext";
+import { AuthContext, AuthenticationContext } from "@/components/AuthenticationContext";
 export default function LoginPage() {
   const { auth, updateAuth } = useContext(AuthContext);
   const router = useRouter();
@@ -12,10 +12,11 @@ export default function LoginPage() {
 
   const handleSubmit = async (ev) => {
     ev.preventDefault();
-    const pushResponse = await customPost('authenticate', data);
-    const { status, statusCode, message, token, user } = pushResponse;
-    if (status == 'success' && statusCode == 200) {
-      if (user?.role === 'clinician') {
+    const pushResponse = await customPost('login/clinicians', data);
+    const { status, statusCode, message, token, result } = pushResponse;
+    console.log(pushResponse);
+    if (status == 'success' && statusCode == 200 && result && token) {
+      if (result?.role === 'clinician') {
         cookieStore.set({
           name: 'PRIME-SYSTEMS-LAB-DOCTOR',
           value: token,
@@ -26,7 +27,7 @@ export default function LoginPage() {
           expires: new Date(Date.now() + 60 * 60 * 1000),
         });
         toast.success('Login successful', { autoClose: 3000 });
-        updateAuth(user);
+        updateAuth(result);
         setLoading(true);
         router.push('/dashboard');
         return;
@@ -60,5 +61,14 @@ export default function LoginPage() {
         </div>
       )}
     </>
+  )
+}
+
+
+LoginPage.getLayout = function (page) {
+  return (
+    <AuthenticationContext>
+      {page}
+   </AuthenticationContext>
   )
 }

@@ -1,9 +1,12 @@
 "use client";
 import { customFetch } from "@/components/request/util";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { AuthContext } from "@/components/AuthenticationContext";
 
 export default function WaitingList() {
+  const { auth } = useContext(AuthContext);
+  const clinicianid = auth?.employeeid;
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState({ type: '', startdate: '', enddate: '' });
   const [data, setData] = useState([]);
@@ -27,8 +30,10 @@ export default function WaitingList() {
   }, [query])
 
   useEffect(() => {
-    getData(2);
-  }, []);
+    if (clinicianid) {
+      getData(clinicianid);
+   };
+  }, [clinicianid]);
 
 
   const navigateTo = (billingid, fullname) => {

@@ -237,8 +237,10 @@ input:is(:focus, :active), select:is(:focus, :active) {
 }
 
 .pending {
-  background-color: red;
+  background-color: rgb(210, 38, 73);
   color: white;
+  font-weight: bolder;
+  text-transform: capitalize;
 }
 .border-danger {
   border: 1px solid red;

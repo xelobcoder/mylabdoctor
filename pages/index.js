@@ -1,8 +1,6 @@
-import Divider from "@/components/Divider";
-
 export default function Homepage() {
   return (
-    <h1>Hello world</h1>
+    <h1>Welcome to the front page of my doctor app</h1>
   )
 }
 

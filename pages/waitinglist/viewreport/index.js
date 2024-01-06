@@ -1,9 +1,12 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { getReadyResult } from "../../../lib/requestUtil";
+import { AuthContext } from "@/components/AuthenticationContext";
 
 export default function ViewReportSummary() {
+  const { auth } = useContext(AuthContext);
+  const clinicianid = auth?.employeeid;
   const searchparams = useSearchParams();
   const [loading, setLoading] = useState(true);
   const [results, setResults] = useState([]);
@@ -15,8 +18,8 @@ export default function ViewReportSummary() {
 
   const getData = useCallback(async () => {
     setLoading(true);
-    await getReadyResult(billingid, 2, setResults, setLoading);
-  }, [billingid]);
+    await getReadyResult(billingid, clinicianid, setResults, setLoading);
+  }, [billingid, clinicianid]);
 
   useEffect(() => {
     getData();
@@ -43,7 +46,7 @@ export default function ViewReportSummary() {
     if (approval == 1) {
       return 'approved';
     }
-
+    
     if (ready == 'true') {
       return 'ready';
     }
@@ -65,7 +68,7 @@ export default function ViewReportSummary() {
     <div>
       <div className="card">
         <div className="card-header">
-          <div className="card-title">
+          <div className="card-title btn-orange">
             <span>Client Name: {clientname}</span>
             <span>Billing Id: {billingid}</span>
           </div>
@@ -82,10 +85,7 @@ export default function ViewReportSummary() {
                       <li onClick={(ev) => handleEmbedLink(item)} className={`border-bottom p-4 test-single-view text-capitalize ${!showpdf ? "grid grid-3" : "grid"}`} key={index}>
                         <span>{item?.name}</span>
                         {showpdf && (<br />)}
-                        <span
-                          className={stage == 'approved' ? 'text-success' :
-                            'ready' ? 'text-orange' : 'processing' ? 'text-info' : 'text-danger'}
-                        >
+                        <span className={stage == 'approved' ? 'text-success' : 'ready' ? 'text-orange' : 'processing' ? 'text-info' : 'text-danger'}>
                           {stage}
                         </span>
                         <span>

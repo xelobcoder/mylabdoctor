@@ -5,7 +5,7 @@ export default function ListItemDisplay({ item, index }) {
 
   return (
     <>
-      <div className={`list-group-item grid grid-5 ${item?.processed == 1 ? 'processed' : 'pending'}`} key={index}>
+      <div className={`list-group-item grid grid-5 `} key={index}>
         <span>{item?.patientid}</span>
         <span>
           {item?.firstname} {item.middlename} {item.lastname} ({item?.gender})({item?.age} {item?.agetype})
