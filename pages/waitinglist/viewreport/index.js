@@ -1,4 +1,3 @@
-"use client";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { getReadyResult } from "../../../lib/requestUtil";

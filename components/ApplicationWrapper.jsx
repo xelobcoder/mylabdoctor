@@ -14,11 +14,13 @@ export default function ApplicationWrapper({ children }) {
     }
   }, [])
 
-  console.log(auth);
+
   return (
-    <div ref={pageRef} className="app-divider">
-      <Navbar />
-      <main className="main-wrapper">{children}</main>
+    <div ref={pageRef} className="wrapper">
+      <div className='side bg-dark'>
+        <Navbar />
+      </div>
+      <main className="main">{children}</main>
     </div>
   )
 }

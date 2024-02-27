@@ -41,9 +41,8 @@ export default function LoginPage() {
 
 
   return (
-    <>
+    <section>
       <ToastContainer />
-      {loading && <div className="loader"></div>}
       {!loading && (
         <div style={{
           display: 'flex', justifyContent: 'center', paddingTop: "200px", backgroundColor: 'wheat', width: '100%',
@@ -52,15 +51,15 @@ export default function LoginPage() {
           <form style={{ width: 'max-content', height: 'max-content' }} className="bg-white p-4" >
             <div className="form-row">
               <label htmlFor="email">Email</label>
-              <input className="prime-input" type="email" value={data.email} onChange={(ev) => setData({ ...data, email: ev.target.value })} id="email" name="email" />
+              <input className="custom-input" type="email" value={data.email} onChange={(ev) => setData({ ...data, email: ev.target.value })} id="email" name="email" />
               <label htmlFor="password">Password</label>
-              <input type="password" className="prime-input" value={data.password} onChange={(ev) => setData({ ...data, password: ev.target.value })} id="password" name="password" />
-              <button type="button" className="btn-success" onClick={(ev) => { handleSubmit(ev) }}> Login</button>
+              <input type="password" className="custom-input" value={data.password} onChange={(ev) => setData({ ...data, password: ev.target.value })} id="password" name="password" />
+              <button type="button" className="btn-success btn-sm btn mt-2" onClick={(ev) => { handleSubmit(ev) }}> Login</button>
             </div>
           </form>
         </div>
       )}
-    </>
+    </section>
   )
 }
 

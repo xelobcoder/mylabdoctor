@@ -1,16 +1,19 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 export default function ListItemDisplay({ item, index }) {
-  const [show, setShow] = useState(false)
+  const [show, setShow] = useState(false);
   const handleShow = () => setShow(!show);
 
   return (
     <>
-      <div className={`list-group-item grid grid-5 `} key={index}>
+      <div className={`list-group-item grid grid-5`} key={index}>
         <span>{item?.patientid}</span>
         <span>
           {item?.firstname} {item.middlename} {item.lastname} ({item?.gender})({item?.age} {item?.agetype})
         </span>
-        <span> {new Date(item?.created_on).toLocaleDateString()} || { new Date(item?.created_on).toLocaleTimeString()}</span>
+        <span>
+          {" "}
+          {new Date(item?.created_on).toLocaleDateString()} || {new Date(item?.created_on).toLocaleTimeString()}
+        </span>
         <span>{new Date(item?.dob).toLocaleDateString()} </span>
         <span className="d-flex justify-content-between">
           <span>{item?.processed == 0 ? "pending" : "completed"}</span>

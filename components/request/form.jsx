@@ -111,181 +111,179 @@ export default function RequestForm() {
     <>
       <ToastContainer />
       <div className="d-flex justify-content-between">
-        <div className={vital.type == 'error' ? 'alert alert-danger' : ''}>
-          {vital.type == 'error' && vital.message}
-        </div>
-     </div>
+        <div className={vital.type == "error" ? "alert alert-danger" : ""}>{vital.type == "error" && vital.message}</div>
+      </div>
       {loading && <div className="loader"></div>}
       {!loading && (
-         <form autoComplete="off" name="personalinformation" id="personalform">
-         <fieldset className="grid grid-two">
-           <legend>Personal Information</legend>
-           <div className="form-row">
-             <label>First Name </label>
-             <input
-               required
-               type="text"
-               name="firstname"
-               value={formData.firstname}
-               onChange={handleChange}
-               tabIndex={1}
-               className="prime-input"
-             />
-           </div>
-           <div className="form-row">
-             <label>Last Name </label>
-             <input
-               required
-               type="text"
-               name="lastname"
-               value={formData.lastname}
-               onChange={handleChange}
-               tabIndex={2}
-               className="prime-input"
-             />
-           </div>
-           <div className="form-row">
-             <label>Middle Name </label>
-             <input
-               type="text"
-               name="middlename"
-               value={formData.middlename}
-               onChange={handleChange}
-               required
-               tabIndex={3}
-               className="prime-input"
-             />
-           </div>
-           <div className="form-row">
-             <label>Email </label>
-             <input
-               type="email"
-               name="email"
-               value={formData.email}
-               onChange={handleChange}
-               tabIndex={4}
-               className="prime-input"
-               required
-               title="Please enter a valid email address"
-             />
-           </div>
-           <div >
-             <label>Mobile Number </label>
-             <div className="d-flex justify-content-between">
-                 <input
-                   type="tel"
-                   name="mobile"
-                   value={formData.mobile}
-                   onChange={(e) => validatemobile(e.target.value)}
-                   tabIndex={5}
-                   maxLength={10}
-                   minLength={10}
-                   step={1}
-                   className="prime-input"
-                   required
-                   title="Please enter a valid 10-digit mobile number"
-               />
-               <label>Number belongs to </label>
-                 <select className="prime-select" name="mobileownership" value={formData.mobileownership} onChange={handleChange}>
-                   <option value="self">Self</option>
-                   <option value="relative">Relative</option>
-                 </select>
+        <form autoComplete="off" name="personalinformation" id="personalform" className='mx-2 my-2'>
+          <fieldset className="grid grid-two">
+            <legend>Personal Information</legend>
+            <div className="form-row">
+              <label>First Name </label>
+              <input
+                required
+                type="text"
+                name="firstname"
+                value={formData.firstname}
+                onChange={handleChange}
+                tabIndex={1}
+                className="custom-input"
+              />
             </div>
-           </div>
-           <div className="form-row">
-             <label>Gender</label>
-             <select className="prime-select" name="gender" value={formData.gender} onChange={handleChange} tabIndex={6}>
-               <option>Select Gender</option>
-               <option value="male">Male</option>
-               <option value="female">Female</option>
-             </select>
-           </div>
-           <div>
-             <label>Date of Birth </label>
-             <div className="d-flex justify-content-around">
-               <input
-                 placeholder="dd"
-                 type="number"
-                 name="days"
-                 value={formData.days}
-                 onChange={handleChange}
-                 tabIndex={7}
-                 maxLength={2}
-                 minLength={1}
-                 max={31}
-                 min={1}
-                 className="prime-input"
-               />
-               <input
-                 placeholder="mm"
-                 type="number"
-                 name="months"
-                 value={formData.months}
-                 onChange={handleChange}
-                 tabIndex={8}
-                 maxLength={2}
-                 minLength={1}
-                 max={12}
-                 min={1}
-                 className="prime-input mx-1"
-               />
-               <input
-                 placeholder="yyyy"
-                 type="number"
-                 name="years"
-                 value={formData.years}
-                 onChange={handleChange}
-                 tabIndex={9}
-                 maxLength={4}
-                 min={4}
-                 className="prime-input"
-               />
-             </div>
-           </div>
-           <div>
-             <label>Age </label>
-             <div className="d-flex">
-               <input type="number" name="age" value={formData.age} onChange={handleChange} tabIndex={10} className="prime-input" />
-               <select className="prime-select mx-1" name="ageType" value={formData.ageType} onChange={handleChange} tabIndex={11}>
-                 <option value="years">years</option>
-                 <option value="months">months</option>
-                 <option value="days">days</option>
-               </select>
-             </div>
-           </div>
-           <div className="form-row">
-             <label>Occupation </label>
-             <input
-               type="text"
-               name="occupation"
-               value={formData.occupation}
-               onChange={handleChange}
-               tabIndex={12}
-               className="prime-input"
-             />
-           </div>
-           <div className="form-row">
-             <label>Marital Status </label>
-             <select className="prime-select" name="maritalstatus" value={formData.maritalstatus} onChange={handleChange} tabIndex={13}>
-               <option value="married">Married</option>
-               <option value="single">Single</option>
-               <option value="divorced">Divorced</option>
-               <option value="widowed">Widowed</option>
-             </select>
-           </div>
-           <div>
-             <button
-               tabIndex={14}
-               type="button"
-               onClick={(ev) => {
-                 handleSubmit(ev)
-               }}
-               className="btn-orange">
-               Save and Continue
-             </button>
-           </div>
-         </fieldset>
-       </form>
+            <div className="form-row">
+              <label>Last Name </label>
+              <input
+                required
+                type="text"
+                name="lastname"
+                value={formData.lastname}
+                onChange={handleChange}
+                tabIndex={2}
+                className="custom-input"
+              />
+            </div>
+            <div className="form-row">
+              <label>Middle Name </label>
+              <input
+                type="text"
+                name="middlename"
+                value={formData.middlename}
+                onChange={handleChange}
+                required
+                tabIndex={3}
+                className="custom-input"
+              />
+            </div>
+            <div className="form-row">
+              <label>Email </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                tabIndex={4}
+                className="custom-input"
+                required
+                title="Please enter a valid email address"
+              />
+            </div>
+            <div>
+              <label>Mobile Number </label>
+              <div className="d-flex justify-content-between">
+                <input
+                  type="tel"
+                  name="mobile"
+                  value={formData.mobile}
+                  onChange={(e) => validatemobile(e.target.value)}
+                  tabIndex={5}
+                  maxLength={10}
+                  minLength={10}
+                  step={1}
+                  className="custom-input"
+                  required
+                  title="Please enter a valid 10-digit mobile number"
+                />
+                <label>Number belongs to </label>
+                <select className="custom-select" name="mobileownership" value={formData.mobileownership} onChange={handleChange}>
+                  <option value="self">Self</option>
+                  <option value="relative">Relative</option>
+                </select>
+              </div>
+            </div>
+            <div className="form-row">
+              <label>Gender</label>
+              <select className="custom-select" name="gender" value={formData.gender} onChange={handleChange} tabIndex={6}>
+                <option>Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
+            </div>
+            <div>
+              <label>Date of Birth </label>
+              <div className="d-flex justify-content-around">
+                <input
+                  placeholder="dd"
+                  type="number"
+                  name="days"
+                  value={formData.days}
+                  onChange={handleChange}
+                  tabIndex={7}
+                  maxLength={2}
+                  minLength={1}
+                  max={31}
+                  min={1}
+                  className="custom-input"
+                />
+                <input
+                  placeholder="mm"
+                  type="number"
+                  name="months"
+                  value={formData.months}
+                  onChange={handleChange}
+                  tabIndex={8}
+                  maxLength={2}
+                  minLength={1}
+                  max={12}
+                  min={1}
+                  className="custom-input mx-1"
+                />
+                <input
+                  placeholder="yyyy"
+                  type="number"
+                  name="years"
+                  value={formData.years}
+                  onChange={handleChange}
+                  tabIndex={9}
+                  maxLength={4}
+                  min={4}
+                  className="custom-input"
+                />
+              </div>
+            </div>
+            <div>
+              <label>Age </label>
+              <div className="d-flex">
+                <input type="number" name="age" value={formData.age} onChange={handleChange} tabIndex={10} className="custom-input" />
+                <select className="custom-select mx-1" name="ageType" value={formData.ageType} onChange={handleChange} tabIndex={11}>
+                  <option value="years">years</option>
+                  <option value="months">months</option>
+                  <option value="days">days</option>
+                </select>
+              </div>
+            </div>
+            <div className="form-row">
+              <label>Occupation </label>
+              <input
+                type="text"
+                name="occupation"
+                value={formData.occupation}
+                onChange={handleChange}
+                tabIndex={12}
+                className="custom-input"
+              />
+            </div>
+            <div className="form-row">
+              <label>Marital Status </label>
+              <select className="custom-select" name="maritalstatus" value={formData.maritalstatus} onChange={handleChange} tabIndex={13}>
+                <option value="married">Married</option>
+                <option value="single">Single</option>
+                <option value="divorced">Divorced</option>
+                <option value="widowed">Widowed</option>
+              </select>
+            </div>
+            <div>
+              <button
+                tabIndex={14}
+                type="button"
+                onClick={(ev) => {
+                  handleSubmit(ev)
+                }}
+                className="btn btn-sm btn-primary mt-3">
+                Save and Continue
+              </button>
+            </div>
+          </fieldset>
+        </form>
       )}
     </>
   )

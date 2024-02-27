@@ -1,4 +1,3 @@
-"use client";
 import { customFetch } from "@/components/request/util";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -44,23 +43,15 @@ export default function WaitingList() {
 
   return (
     <>
-      <div className="filtering-waitinglist">
-        {/* <select className="prime-select" onChange={(ev) => setQuery({ ...query, type: ev.target.value })}>
-          <option value="all">All</option>
-          <option value='sampling'>pending sampling</option>
-          <option value='processing'>sample processing</option>
-          <option value='ready' >result ready</option>
-          <option value='approved'>approved</option>
-        </select> */}
-        <input type="date" onChange={(ev) => setQuery({ ...query, startdate: ev.target.value })} className="prime-input" />
-        <input type="date" onChange={(ev) => setQuery({ ...query, enddate: ev.target.value })} className="prime-input mx-2" />
-        <button className="btn-orange" onClick={(ev) => { getData(2) }}>search</button>
-      </div>
+      <section>
+        <div className='col-12'>
+          <input type="date" onChange={(ev) => setQuery({ ...query, startdate: ev.target.value })} className="custom-input col-2" />
+          <input type="date" onChange={(ev) => setQuery({ ...query, enddate: ev.target.value })} className="custom-input mx-2 col-2" />
+          <button className="btn btn-primary btn-sm" onClick={(ev) => { getData(2) }}>search</button>
+        </div>
+      </section>
       <section className="my-2">
-        {loading && <h4 className="loader"></h4>}
-        {!loading && data.length > 0 && (
-          <>
-            <div className="list-group">
+        <div className="list-group">
               {data.map((item, index) => {
                 return (
                   <div className="list-group-item bg-white grid-5 p-1 " key={index}>
@@ -74,9 +65,7 @@ export default function WaitingList() {
                   </div>
                 )
               })}
-            </div>
-          </>
-        )}
+        </div>
       </section>
     </>
   )
