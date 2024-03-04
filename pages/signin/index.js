@@ -1,9 +1,9 @@
 "use client"
 import { useRouter } from "next/navigation";
-import { customPost } from "@/components/request/util";
+import { customPost } from "../../components/request/util";
 import { useState, useContext } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import { AuthContext, AuthenticationContext } from "@/components/AuthenticationContext";
+import { AuthContext, AuthenticationContext } from "../../components/AuthenticationContext";
 export default function LoginPage() {
   const { auth, updateAuth } = useContext(AuthContext);
   const router = useRouter();

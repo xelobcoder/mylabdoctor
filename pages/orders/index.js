@@ -1,8 +1,8 @@
-import { AuthContext } from "@/components/AuthenticationContext";
-import ListItemDisplay from "@/components/ListItemDisplay";
-import Loader from "@/components/accessories/loader";
-import Pagination from "@/components/accessories/pagination";
-import { getOrders } from "@/lib/ordersUtil";
+import { AuthContext } from "../../components/AuthenticationContext";
+import ListItemDisplay from "../../components/ListItemDisplay";
+import Loader from "../../components/accessories/Loader";
+import Pagination from "../../components/accessories/pagination";
+import { getOrders } from "../../lib/ordersUtil";
 import { useCallback, useContext, useEffect, useState } from "react";
 
 export default function OrdersPage() {

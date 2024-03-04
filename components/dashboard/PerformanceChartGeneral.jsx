@@ -1,19 +1,10 @@
 "use client"
 import { useEffect, useState, useCallback } from "react"
 import { BarChart, CartesianGrid, LineChart, Line, XAxis, YAxis, Tooltip, Legend, Bar, ResponsiveContainer } from "recharts"
-import Loader from "../accessories/loader"
+import Loader from "../accessories/Loader"
 import { customFetch } from "../request/util"
 
-export default function PerformanceChartGeneral({
-  target,
-  upCallReceiver,
-  type,
-  show,
-  title,
-  subtarget,
-  upcall,
-  clinicianid,
-}) {
+export default function PerformanceChartGeneral({ target, upCallReceiver, type, show, title, subtarget, upcall, clinicianid }) {
   const [data, setData] = useState([])
   const [isloading, setLoading] = useState(true)
 
@@ -24,10 +15,16 @@ export default function PerformanceChartGeneral({
         .then((data) => {
           const { result } = data
           setLoading(false)
-          if (result && result.length > 0) {
-            setData(result)
+          if (result) {
+            setData((prev) => {
+              if (result.length > 0) {
+                return result
+              } else {
+                return prev
+              }
+            })
+            upcall && upCallReceiver(result)
           } else setData([])
-          upcall && upCallReceiver(result)
         })
         .catch((err) => {
           setLoading(false)
@@ -78,9 +75,5 @@ export default function PerformanceChartGeneral({
     }
   }
 
-  return (
-    <>
-      <div className="bg-white px-2">{renderer()}</div>
-    </>
-  )
+  return <section className="bg-white px-2">{renderer()}</section>
 }

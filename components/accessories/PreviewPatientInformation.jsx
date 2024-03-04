@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { customFetch } from "../request/util"
 import CardRack from "./cardRacks"
-import Loader from "./loader"
+import Loader from "./Loader"
 
 export default function PreviewPatientInformation({ patientid }) {
   const [data, setData] = useState({})

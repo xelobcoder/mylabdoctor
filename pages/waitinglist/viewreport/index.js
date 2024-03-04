@@ -1,6 +1,6 @@
 import { useSearchParams } from "next/navigation";
-import ReadyTestSummaryAccordion from "@/components/waitinglist/readyTestSummaryAccordion";
-import PreviewPatientInformation from "@/components/accessories/PreviewPatientInformation";
+import ReadyTestSummaryAccordion from "../../../components/waitinglist/readyTestSummaryAccordion";
+import PreviewPatientInformation from "../../../components/accessories/PreviewPatientInformation";
 
 export default function ViewReportSummary() {
   const searchparams = useSearchParams();

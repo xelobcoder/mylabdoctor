@@ -196,3 +196,28 @@ input[type="email"] {
 li {
   list-style-type: none !important;
 }
+.grid-30-30-30{
+  display: grid !important;
+  grid-template-columns: 35% 35% auto !important;
+}
+.loader {
+  border: 10px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 5px solid var(--prime-attention);
+  border-right: 5px solid var(--prime-attention);
+  border-bottom: 5px solid var(--prime-attention);
+  animation: spin 500ms linear infinite;
+  margin: 0 auto;
+  height: 100px;
+  width: 100px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { handleSearch } from "../../lib/billingUtil";
 import { useRouter } from "next/navigation";
-import Loader from "@/components/accessories/loader";
+import Loader from "../../components/accessories/Loader";
 
 export default function RequestTest() {
   const [query, setQuery] = useState('');

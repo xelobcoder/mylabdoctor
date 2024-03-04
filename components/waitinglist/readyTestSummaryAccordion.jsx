@@ -105,10 +105,10 @@ export default function  ReadyTestSummaryAccordion({ id }) {
             updatePrintCount(item, index)
             printResultNavigator(navigate, id, item, true)
           }}
-          className="btn btn-primary btn-sm mx-2">
-          print count({printcount ? printcount : 0})
+          className="btn btn-primary btn-sm">
+          preview report({printcount ? printcount : 0})
         </button>
-        <button className="btn btn-secondary btn-sm mx-2">preview count(10)</button>
+        {/* <button className="btn btn-secondary btn-sm mx-2">preview count(10)</button> */}
       </span>
     )
   }
@@ -117,33 +117,35 @@ export default function  ReadyTestSummaryAccordion({ id }) {
       return <Loader />
     } else {
       return (
-        <div className="mt-4 accordion mx-2" defaultActiveKey={"0"}>
-          <div className="accordion-item" eventKey="0">
-            <div className="m-0 p-0 accordion-body">
-              {results.map((item, index) => {
-                const { ready } = item
-                return (
-                  <ul key={index} className={`m-0 p-0 ${ready === "true" && " border-3 border-start border-success"}`}>
-                    <li className={`grid-100 px-3 py-2 ${index != results.length - 1 && "border-bottom"} py-2`}>
-                      <div>
-                        <span className="fw-bold text-capitalize">{item.name}</span>
-                      </div>
-                      <div className="grid-100">
-                        {ReadyComp(item)}
-                        {ready === "true" && (
-                          <>
-                            {approved(item)}
-                            {buttonsGroup(item, index)}
-                          </>
-                        )}
-                      </div>
-                    </li>
-                  </ul>
-                )
-              })}
+        <section >
+          <div className="mt-4 accordion mx-2">
+            <div className="accordion-item">
+              <div className="m-0 p-0 accordion-body">
+                {results.map((item, index) => {
+                  const { ready } = item
+                  return (
+                    <ul key={index} className={`m-0 p-0 ${ready === "true" && " border-3 border-start border-success"}`}>
+                      <li className={`grid-100 px-3 py-2 ${index != results.length - 1 && "border-bottom"} py-2`}>
+                        <div>
+                          <span className="fw-bold text-capitalize">{item.name}</span>
+                        </div>
+                        <div className="grid-100">
+                          {ReadyComp(item)}
+                          {ready === "true" && (
+                            <>
+                              {approved(item)}
+                              {buttonsGroup(item, index)}
+                            </>
+                          )}
+                        </div>
+                      </li>
+                    </ul>
+                  )
+                })}
+              </div>
             </div>
           </div>
-        </div>
+        </section>
       )
     }
   }

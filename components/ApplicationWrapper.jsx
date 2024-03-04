@@ -2,7 +2,7 @@ import { useContext, useEffect,useRef } from "react"
 import Navbar from "./Navbar"
 import { AuthContext } from "./AuthenticationContext"
 import { useRouter } from "next/navigation";
-import { isAuthenticated } from "@/lib/util";
+import { isAuthenticated } from "../lib/util";
 export default function ApplicationWrapper({ children }) {
   const { auth, updateAuth } = useContext(AuthContext);
   const router = useRouter();

@@ -1,5 +1,5 @@
-import { AuthContext } from "@/components/AuthenticationContext";
-import GeneralSalesChart from "@/components/dashboard/GeneralSalesCharts";
+import { AuthContext } from "../../components/AuthenticationContext";
+import GeneralSalesChart from "../../components/dashboard/GeneralSalesCharts";
 import { useContext } from "react";
 
 export default function Dashboard() {

@@ -1,8 +1,8 @@
-import { customFetch } from "@/components/request/util";
+import { customFetch } from "../../components/request/util";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { AuthContext } from "@/components/AuthenticationContext";
-import TableDisplay from "@/components/accessories/TableDisplay";
+import { AuthContext } from "../../components/AuthenticationContext";
+import TableDisplay from "../../components/accessories/TableDisplay";
 
 export default function WaitingList() {
   const { auth } = useContext(AuthContext);
