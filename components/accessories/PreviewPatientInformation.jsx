@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { customFetch } from "../request/util"
-import CardRack from "./cardRacks"
+import CardRacks from "./cardracks"
 import Loader from "./Loader"
 
 export default function PreviewPatientInformation({ patientid }) {
@@ -28,7 +28,7 @@ export default function PreviewPatientInformation({ patientid }) {
       {isloading ? (
         <Loader />
       ) : (
-        <CardRack
+        <CardRacks
           activestate={active}
           header={
             <h5

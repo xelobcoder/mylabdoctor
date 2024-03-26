@@ -1,5 +1,5 @@
 import { useState } from "react"
-import CardRacks from "../accessories/CardRacks"
+import CardRacks from "../accessories/cardracks"
 import { useRouter } from "next/navigation"
 import { monthCollection, internationCurrencyFormat } from "../accessories/useFetch"
 import PerformanceChartGeneral from "./PerformanceChartGeneral"
