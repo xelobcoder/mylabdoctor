@@ -12,6 +12,7 @@ export default function ApplicationWrapper({ children }) {
     if (pageRef.current) {
       isAuthenticated(auth, router, updateAuth);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
 
