@@ -9,16 +9,18 @@ export default function PreviewPatientInformation({ patientid }) {
   const [active, setActive] = useState(false)
 
   useEffect(() => {
-    setLoading(true)
-    customFetch(`register/personalinformation?patientid=${patientid}`)
-      .then((data) => {
-        setData(data?.result)
-        setLoading(false)
-      })
-      .catch((err) => {
-        setLoading(false)
-        setData({})
-      })
+    if (patientid) {
+      setLoading(true)
+      customFetch(`register/personalinformation?patientid=${patientid}`)
+        .then((data) => {
+          setData(data?.result)
+          setLoading(false)
+        })
+        .catch((err) => {
+          setLoading(false)
+          setData({})
+        })
+    }
   }, [patientid])
 
   return (

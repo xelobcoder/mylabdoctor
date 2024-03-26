@@ -2,10 +2,10 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import { getTestList } from "../../../lib/billingUtil";
 import { ToastContainer, toast } from "react-toastify";
 import { useSearchParams } from "next/navigation";
-import { customPost } from "@/components/request/util";
-import { AuthContext } from "@/components/AuthenticationContext";
+import { customPost } from "../../../components/request/util";
+import { AuthContext } from "../../../components/AuthenticationContext";
 import Autocomplete from '@mui/joy/Autocomplete';
-import { internationCurrencyFormat } from "@/components/accessories/useFetch";
+import { internationCurrencyFormat } from "../../../components/accessories/useFetch";
 
 
 export default function Billing() {
@@ -28,14 +28,11 @@ export default function Billing() {
 
 
 
-
-
-
-
-
-
   const addtocart = async (item) => {
     // check if item is already in cart
+    if (!item.hasOwnProperty("id") || typeof item != 'object') {
+      throw new Error('object required');
+    }
     if (cart.length == 0) { setCart([item]); }
 
     if (cart.length > 0) {
@@ -64,7 +61,6 @@ export default function Billing() {
     const checkout = cart.map((item) => {
       return { id: item.id, name: item.name, price: item.price }
     });
-
     if (employeeid && checkout.length > 0) {
       setLoading(true);
       const pushRequest = await customPost('orders/temporary', { clinicianid: employeeid, data: checkout ,patientid});

@@ -14,7 +14,6 @@ export default function LoginPage() {
     ev.preventDefault();
     const pushResponse = await customPost('login/clinicians', data);
     const { status, statusCode, message, token, result } = pushResponse;
-    console.log(pushResponse);
     if (status == 'success' && statusCode == 200 && result && token) {
       if (result?.role === 'clinician') {
         cookieStore.set({
